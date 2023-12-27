@@ -1,25 +1,57 @@
-/**
+/* /**
   |============================
   | include css partials with
   | default @import url()
   |============================
 */
-@import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
+/* @import url('./reset.css'); */
+/* @import url('./vite-promo.css'); */
+/* @import url('./header.css'); */
+/*  */
+/* :root { */
+  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  /* font-size: 16px; */
+  /* line-height: 24px; */
+  /* font-weight: 400; */
+/*  */
+  /* color: #242424; */
+  /* background-color: rgba(255, 255, 255, 0.87); */
+/*  */
+  /* font-synthesis: none; */
+  /* text-rendering: optimizeLegibility; */
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+  /* -webkit-text-size-adjust: 100%; */
+/* } */ 
+  
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
 
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1440px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
 
-  color: #242424;
-  background-color: rgba(255, 255, 255, 0.87);
+img {
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    width: 360px;
+    height: 200px;
+}
+
+
+.sl-wrapper{
+    background: rgba(46, 47, 66, 0.80);
+}
+.gallery-link{
+    width: 1112px;
+height: 640px;
 }
