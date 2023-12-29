@@ -1,12 +1,33 @@
-import{S as l,i as u}from"./assets/vendor-9310f15c.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))a(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&a(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerpolicy&&(t.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?t.credentials="include":e.crossorigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function a(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const d=document.getElementById("search-form"),f=document.getElementById("search-input"),c=document.getElementById("gallery"),m="https://pixabay.com/api/",y="41471340-7b105b7a368edb6edd340273b",p=new l(".gallery a",{captions:!0,captionsData:"alt",captionDelay:250});d.addEventListener("submit",async r=>{r.preventDefault();const o=f.value;try{const e=(await(await fetch(`${g()}&q=${o}`)).json()).hits;e.length>0?(c.innerHTML="",c.innerHTML=e.reduce((t,{BASE_URL:n,images:i})=>t+`
-<li class="gallery-item">
-  <a class="gallery-link" href="${i}" download="none">
-    <img
-      class="gallery-image"
-      src="${n}"
-      data-source="${i}"
-      
-    />
-  </a>
-</li>`,""),p.refresh()):u.error({title:"Error",message:"Sorry, there are no images matching your search"})}catch(s){console.error(s)}});const g=()=>{const r=new URL(m);return r.searchParams.append("key",y),r};
+import{S as m,i as y}from"./assets/vendor-9310f15c.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver(e=>{for(const s of e)if(s.type==="childList")for(const n of s.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&r(n)}).observe(document,{childList:!0,subtree:!0});function a(e){const s={};return e.integrity&&(s.integrity=e.integrity),e.referrerpolicy&&(s.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?s.credentials="include":e.crossorigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function r(e){if(e.ep)return;e.ep=!0;const s=a(e);fetch(e.href,s)}})();const g=document.getElementById("search-form"),h=document.getElementById("search-input"),i=document.getElementById("gallery"),v="41471340-7b105b7a368edb6edd340273b",b=new m(".gallery a",{captions:!0,captionsData:"alt",captionDelay:250});g.addEventListener("submit",async l=>{l.preventDefault();const t=h.value;try{const a=await fetch(`https://pixabay.com/api/?key=${v}&q=${t}`),{hits:r,totalHits:e}=await a.json();if(r.length===0){y.error({title:"Error",message:"Sorry, there are no images matching your search"});return}i.innerHTML="";const s=r.map(({webformatURL:n,largeImageURL:o,tags:c,likes:d,views:u,comments:p,downloads:f})=>`
+        
+            <li class="gallery-item">
+                <a class="gallery-link" href="${o}" download="none">
+                    <img
+                        class="gallery-image"
+                        src="${n}"
+                        data-source="${o}"
+                        alt="${c}"
+                    />
+                </a>
+                
+                <div class="card-info">
+                <div class="field">
+                    <span class="label">Likes</span>
+                    <span class="value">${d}</span>    
+                </div>
+                <div class="field">
+                    <span class="label">Views</span>
+                    <span class="value">${u}</span>   
+                </div>
+                <div class="field">
+                    <span class="label">Comments</span>
+                    <span class="value">${p}</span>    
+                </div>
+                <div class="field">
+                    <span class="label">Downloads</span>
+                    <span class="value">${f}</span>    
+                </div>
+            </div>
+            </li>
+        `);i.insertAdjacentHTML("beforeend",s),b.refresh()}catch(a){console.error(a)}l.target.reset()});
 //# sourceMappingURL=commonHelpers.js.map
