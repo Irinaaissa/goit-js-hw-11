@@ -16,23 +16,31 @@ const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
 });
+const loader = document.querySelector(".loader");
+
+function showLoadingIndicator() {
+    loader.style.display = "block";
+  }
+
+  function hideLoadingIndicator() {
+    loader.style.display = "none";
+  }
+
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const query = searchInput.value;
-
-    // const progressBar = document.createElement('div');
-    // progressBar.classList.add('progress-bar');
-    // searchForm.appendChild(progressBar);
-
+     showLoadingIndicator();
     try {
         const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${query}`);
         const {hits,totalHits} = await response.json();
-        if (hits.length === 0) {
+        if (query ===  "") {
             iziToast.error({
                 title: 'Error',
                 message: 'Sorry, there are no images matching your search'
+                
             });
-            return;
+            return hideLoadingIndicator();
+            
         }
         gallery.innerHTML = '';
         const markup = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
@@ -70,9 +78,13 @@ searchForm.addEventListener('submit', async (event) => {
         gallery.insertAdjacentHTML("beforeend",markup);
         lightbox.refresh();
     } catch (error) {
+        
+
+
         console.error(error); 
     }
-    // searchForm.removeChild(progressBar);
+     hideLoadingIndicator();
+
     event.target.reset();
 });
 
