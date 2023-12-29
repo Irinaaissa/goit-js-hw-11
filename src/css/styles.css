@@ -23,23 +23,24 @@
   /* -moz-osx-font-smoothing: grayscale; */
   /* -webkit-text-size-adjust: 100%; */
 /* } */ 
+@import url(./loader.css);
   
-ul {
+ul,li,ol {
     margin: 0;
     padding-left: 0;
     list-style: none;
+    list-style-type: none;
+}
+.gallery {
+  
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 }
 
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    width: 1440px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-}
 
 img {
 
@@ -55,3 +56,121 @@ img {
     width: 1112px;
 height: 640px;
 }
+.description{
+  display: flex;
+}
+.description-img{
+  display: inline;
+}
+#search-form{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  display: flex;
+  column-gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top:36px;
+}
+#search-form input:hover,
+#search-form input:focus {
+  cursor: pointer;
+  border: 1px solid #808080;
+  
+ }
+ button {
+  cursor: pointer;
+  border-radius: 8px;
+  background: #4E75FF;
+  color: #FFF;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  width: 91px;
+ height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+button:hover,
+button:focus {
+  background-color: #6C8CFF;
+}
+
+#search-input{
+  width: 272px;
+height: 40px;
+border-radius: 4px;
+border: 1px solid #6C8CFF;
+}
+.card-info {
+  color: #2e2f42;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-info .field {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-info .label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.card-info .value {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-left: auto;
+margin-right: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FF3D00;
+  width: 6px;
+  height: 6px;
+  transform: translate(150%, 150%);
+  border-radius: 50%;
+}
+.loader::before {
+  left: auto;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  transform: translate(-150%, -150%);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

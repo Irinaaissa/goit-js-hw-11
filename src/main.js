@@ -16,37 +16,58 @@ const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
 });
-
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const query = searchInput.value;
     try {
-        const response = await fetch(`${getBaseUrl()}&q=${query}`);
-        const data = await response.json();
-        const images = data.hits;
-        if (images.length > 0) {
-            gallery.innerHTML = '';
-            gallery.innerHTML = images.reduce((html, { BASE_URL, images, }) => html + `
-<li class="gallery-item">
-  <a class="gallery-link" href="${images}" download="none">
-    <img
-      class="gallery-image"
-      src="${BASE_URL}"
-      data-source="${images}"
-      
-    />
-  </a>
-</li>`, '');
-            lightbox.refresh();
-        } else {
+        const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${query}`);
+        const {hits,totalHits} = await response.json();
+        if (hits.length === 0) {
             iziToast.error({
                 title: 'Error',
                 message: 'Sorry, there are no images matching your search'
             });
+            return;
         }
+        gallery.innerHTML = '';
+        const markup = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
+        
+            <li class="gallery-item">
+                <a class="gallery-link" href="${largeImageURL}" download="none">
+                    <img
+                        class="gallery-image"
+                        src="${webformatURL}"
+                        data-source="${largeImageURL}"
+                        alt="${tags}"
+                    />
+                </a>
+                
+                <div class="card-info">
+                <div class="field">
+                    <span class="label">Likes</span>
+                    <span class="value">${likes}</span>    
+                </div>
+                <div class="field">
+                    <span class="label">Views</span>
+                    <span class="value">${views}</span>   
+                </div>
+                <div class="field">
+                    <span class="label">Comments</span>
+                    <span class="value">${comments}</span>    
+                </div>
+                <div class="field">
+                    <span class="label">Downloads</span>
+                    <span class="value">${downloads}</span>    
+                </div>
+            </div>
+            </li>
+        `);
+        gallery.insertAdjacentHTML("beforeend",markup);
+        lightbox.refresh();
     } catch (error) {
-        console.error(error);
+        console.error(error); 
     }
+    event.target.reset();
 });
 
 const getBaseUrl = () => {
