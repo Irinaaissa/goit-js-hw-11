@@ -19,6 +19,11 @@ const lightbox = new SimpleLightbox('.gallery a', {
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const query = searchInput.value;
+
+    // const progressBar = document.createElement('div');
+    // progressBar.classList.add('progress-bar');
+    // searchForm.appendChild(progressBar);
+
     try {
         const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${query}`);
         const {hits,totalHits} = await response.json();
@@ -67,6 +72,7 @@ searchForm.addEventListener('submit', async (event) => {
     } catch (error) {
         console.error(error); 
     }
+    // searchForm.removeChild(progressBar);
     event.target.reset();
 });
 
