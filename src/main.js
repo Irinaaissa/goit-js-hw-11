@@ -26,7 +26,7 @@ function hideLoadingIndicator() {
     loader.style.display = 'none';
 }
 
-searchForm.addEventListener('submit', async event => {
+searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const query = searchInput.value;
@@ -57,7 +57,7 @@ searchForm.addEventListener('submit', async event => {
             .map(
                 ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
         <li class="gallery-item">
-          <a class="gallery-link" href="${largeImageURL}" download="none">
+          <a class="gallery-link" href="${largeImageURL}" >
             <img
               class="gallery-image"
               src="${webformatURL}"
