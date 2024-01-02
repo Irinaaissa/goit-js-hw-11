@@ -92,8 +92,12 @@ searchForm.addEventListener('submit', async (event) => {
         gallery.insertAdjacentHTML('beforeend', markup);
 
         lightbox.refresh();
-    } catch (error) {
-        console.error(error);
+    } catch (error) 
+    {
+        iziToast.error({
+            title: 'Error',
+            message: 'Error',
+        });
     } finally {
         hideLoadingIndicator();
         event.target.reset();
